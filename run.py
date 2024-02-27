@@ -1,28 +1,24 @@
 from random import randint
 
 class BattleshipsGame:
-    def __init__():
+    def __init__(self, size=5, num_turns=4):
+        self.size = size
+        self.num_turns = num_turns
+        self.board = [['O'] * size for _ in range(size)]
 
     
-    """
-    Prints game board
-    """
-    def print_board():
+    # Prints game board
+    def print_board(self):
+        for row in self.board:
+            print(" ".join(row))
 
     
-    """
-    Validates guess within game board
-    """
-    def validate_guess():
+    # Main game functions
+    def play(self):
+        print("Time for Battleships")
+        self.print_board()
 
     
-    """
-    Takes input from player and inputs it onto board
-    """
-    def make_guess():
-
-    
-    """
-    Main game functions
-    """
-    def play():
+if __name__ == "__main__":
+    game = BattleshipsGame(size=5, num_turns=4)
+    game.play()
