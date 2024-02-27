@@ -19,8 +19,19 @@ class BattleshipsGame:
         if 0 <= row < self.size and 0 <= col < self.size:
             return True
         else:
-            print("Oops, that's not even in the ocean.")
+            print("Sorry , thats not on the board.")
             return False
+
+
+    def make_guess(self):
+        while True:
+            try:
+                guess_input = input("Enter your guess (row, col) with a comma: ")
+                guess_row, guess_col = map(int, guess_input.split(','))
+                if self.validate_guess(guess_row, guess_col):
+                    return guess_row, guess_col
+            except ValueError:
+                print("Please enter a guess in board range.")
 
     
     # Main game functions
