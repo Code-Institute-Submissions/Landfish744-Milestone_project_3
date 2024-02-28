@@ -38,6 +38,24 @@ class BattleshipsGame:
     def play(self):
         print("Time for Battleships")
         self.print_board()
+        
+        for turn in range(self.num_turns):
+            print("Turn", turn + 1)
+            guess_row, guess_col = self.make_guess()
+
+            if guess_row == self.ship_row and guess_col == self.ship_col:
+                print("You sunk my battleship!")
+                return
+
+            if self.board[guess_row][guess_col] == "X":
+                print("You already guessed that one.")
+            else:
+                print("You missed!")
+                self.board[guess_row][guess_col] = "X"
+
+            self.print_board()
+
+        print("Game Over.")
 
     
 if __name__ == "__main__":
