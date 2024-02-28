@@ -80,14 +80,17 @@ class BattleshipsGame:
     
 if __name__ == "__main__":
     """
-    Allows user to choose game board size and play again.
+    Allows user to choose game board size , number of turns and play again.
     """
     while True:
         try:
             size = int(input("Enter the size of the game board: "))
             if size < 1:
                 raise ValueError("Size must be a 1 or above.")
-            game = BattleshipsGame(size=size)
+            num_turns = int(input("Enter the number of turns: "))
+            if num_turns < 1:
+                raise ValueError("Number of turns must be 1 or above.")
+            game = BattleshipsGame(size=size, num_turns=num_turns)
             game.play()
         except ValueError as e:
             print("Error:", e)
