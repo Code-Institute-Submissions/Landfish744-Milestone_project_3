@@ -104,13 +104,20 @@ if __name__ == "__main__":
             if size == "quit":
                 print("thank you for playing")
                 exit()
+            while not size.isdigit():
+                print("Size must be a number.")
+                size = input("Enter the size of the game board: ").strip()
             size = int(size)
             possible_sizes = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
-            while int(size) not in possible_sizes:
+            while size not in possible_sizes:
                 print("Size must be in range from 1 to 12.")
                 print("That was not a quit command or a number!")
-                size = input("Enter the size of the game board: ").strip()
-            num_turns = int(input("Enter the number of turns: "))
+                size = int(input("Enter the size of the game board: ").strip())
+            num_turns = input("Enter the number of turns: ")
+            while not num_turns.isdigit():
+                print("Number of turns must be a number.")
+                num_turns = input("Enter the number of turns: ").strip()
+            num_turns = int(num_turns)
             if num_turns not in possible_sizes:
                 raise ValueError(
                     "Number of turns must be in range from 1 to 12.")
