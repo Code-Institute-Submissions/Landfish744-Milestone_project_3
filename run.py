@@ -30,7 +30,7 @@ class BattleshipsGame:
         if 0 <= row < self.size and 0 <= col < self.size:
             return True
         else:
-            print("Sorry , thats not on the board.")
+            print("Sorry , thats not on the board.\n")
             return False
 
 
@@ -41,12 +41,14 @@ class BattleshipsGame:
         """
         while True:
             try:
-                guess_input = input("Enter your guess (row, col) with a comma: ")
+                guess_input = input("Enter your guess (row, col) with a comma: \n")
+                if guess_input.lower() == 'quit':
+                    return 'quit', 'quit'
                 guess_row, guess_col = map(int, guess_input.split(','))
                 if self.validate_guess(guess_row, guess_col):
                     return guess_row, guess_col
             except ValueError:
-                print("Please enter a guess in board range.")
+                print("Please enter a guess in board range.\n")
 
     
     
@@ -54,7 +56,7 @@ class BattleshipsGame:
         """
         Main game functions of user and computers guesses.
         """
-        print("Time for Battleships")
+        print("Time for Battleships\n")
         self.print_board()
         
         turn = 0
@@ -62,12 +64,16 @@ class BattleshipsGame:
             print("Turn", turn + 1)
             guess_row, guess_col = self.make_guess()
 
+            if guess_row == 'quit' and guess_col == 'quit':
+                print("Quiting game.\n")
+                return
+
             if guess_row == self.ship_row and guess_col == self.ship_col:
-                print("You sunk my battleship!")
+                print("You sunk my battleship!\n")
                 return
 
             if self.board[guess_row][guess_col] == "X":
-                print("You already guessed that one.")
+                print("You already guessed that one.\n")
                 continue
 
             print("You missed!")
@@ -84,17 +90,17 @@ if __name__ == "__main__":
     """
     while True:
         try:
-            size = int(input("Enter the size of the game board: "))
+            size = int(input("Enter the size of the game board: \n"))
             if size < 1:
-                raise ValueError("Size must be a 1 or above.")
-            num_turns = int(input("Enter the number of turns: "))
+                raise ValueError("Size must be a 1 or above.\n")
+            num_turns = int(input("Enter the number of turns: \n"))
             if num_turns < 1:
-                raise ValueError("Number of turns must be 1 or above.")
+                raise ValueError("Number of turns must be 1 or above.\n")
             game = BattleshipsGame(size=size, num_turns=num_turns)
             game.play()
         except ValueError as e:
             print("Error:", e)
         
-        play_again = input("Do you want to play again? (yes/no): ").lower()
+        play_again = input("Do you want to play again? (yes/no): \n").lower()
         if play_again != 'yes':
             break
