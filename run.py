@@ -1,22 +1,32 @@
 from random import randint
 
-# Outline of game.
+
 class BattleshipsGame:
     def __init__(self, size=5, num_turns=4):
+        """
+        Start the battleship game with a given size 
+        and number of turns.
+        """
         self.size = size
         self.num_turns = num_turns
         self.board = [['O'] * size for _ in range(size)]
         self.ship_row = randint(0, size - 1)
         self.ship_col = randint(0, size - 1)
     
-    # Prints game board.
+    
     def print_board(self):
+        """
+        Print the game board.
+        """
         for row in self.board:
             print(" ".join(row))
 
 
-    # Validates guess of the user.
+    
     def validate_guess(self, row, col):
+        """
+        Validate if the guess is in the game board.
+        """
         if 0 <= row < self.size and 0 <= col < self.size:
             return True
         else:
@@ -24,8 +34,11 @@ class BattleshipsGame:
             return False
 
 
-    # Takes user input and applies it to game.
+    
     def make_guess(self):
+        """
+        Gets user to enter guess and validates if its in range.
+        """
         while True:
             try:
                 guess_input = input("Enter your guess (row, col) with a comma: ")
@@ -36,8 +49,11 @@ class BattleshipsGame:
                 print("Please enter a guess in board range.")
 
     
-    # Main game functions of user and computers guesses.
+    
     def play(self):
+        """
+        Main game functions of user and computers guesses.
+        """
         print("Time for Battleships")
         self.print_board()
         
@@ -63,6 +79,9 @@ class BattleshipsGame:
 
     
 if __name__ == "__main__":
+    """
+    Allows user yo play again.
+    """
     while True:
         game = BattleshipsGame(size=5, num_turns=4)
         game.play()
