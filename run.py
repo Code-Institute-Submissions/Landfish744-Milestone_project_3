@@ -34,24 +34,6 @@ class BattleshipsGame:
             return False
 
 
-    
-    def make_guess(self):
-        """
-        Gets user to enter guess and validates if its in range.
-        """
-        while True:
-            try:
-                guess_input = input("Enter your guess (row, col) with a comma: \n")
-                if guess_input.lower() == 'quit':
-                    return 'quit', 'quit'
-                guess_row, guess_col = map(int, guess_input.split(','))
-                if self.validate_guess(guess_row, guess_col):
-                    return guess_row, guess_col
-            except ValueError:
-                print("Please enter a guess in board range.\n")
-
-    
-    
     def play(self):
         """
         Main game functions of user and computers guesses.
@@ -62,26 +44,32 @@ class BattleshipsGame:
         turn = 0
         while turn < self.num_turns:
             print("Turn", turn + 1)
-            guess_row, guess_col = self.make_guess()
-
-            if guess_row == 'quit' and guess_col == 'quit':
-                print("Quiting game.\n")
+            
+            guess_input = input("Enter your guess (row, col) with a comma, or type 'quit' to end the game: \n")
+            if guess_input.lower() == 'quit':
+                print("Quitting game.\n")
                 return
+            
+            try:
+                guess_row, guess_col = map(int, guess_input.split(','))
+                if self.validate_guess(guess_row, guess_col):
+                    if guess_row == self.ship_row and guess_col == self.ship_col:
+                        print("You sunk my battleship!\n")
+                        return
 
-            if guess_row == self.ship_row and guess_col == self.ship_col:
-                print("You sunk my battleship!\n")
-                return
+                    if self.board[guess_row][guess_col] == "X":
+                        print("You already guessed that one.\n")
+                        continue
 
-            if self.board[guess_row][guess_col] == "X":
-                print("You already guessed that one.\n")
-                continue
-
-            print("You missed!")
-            self.board[guess_row][guess_col] = "X"
-            self.print_board()
-            turn += 1
-
+                    print("You missed!")
+                    self.board[guess_row][guess_col] = "X"
+                    self.print_board()
+                    turn += 1
+            except ValueError:
+                print("Please enter a guess in board range.\n")
+        
         print("Game Over.")
+
 
     
 if __name__ == "__main__":
@@ -90,6 +78,10 @@ if __name__ == "__main__":
     """
     while True:
         try:
+            print("Rules: You choose turns and grid size.")
+            print("User and computer will choose starting from 0,0.")
+            print("Game will end at end of turns or when player or computer hits a ship.")
+            print("You can also type 'quit' to end game or start a new game.\n")
             size = int(input("Enter the size of the game board: \n"))
             if size < 1:
                 raise ValueError("Size must be a 1 or above.\n")
