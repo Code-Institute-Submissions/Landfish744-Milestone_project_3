@@ -80,11 +80,18 @@ class BattleshipsGame:
     
 if __name__ == "__main__":
     """
-    Allows user yo play again.
+    Allows user to choose game board size and play again.
     """
     while True:
-        game = BattleshipsGame(size=5, num_turns=4)
-        game.play()
+        try:
+            size = int(input("Enter the size of the game board: "))
+            if size < 1:
+                raise ValueError("Size must be a 1 or above.")
+            game = BattleshipsGame(size=size)
+            game.play()
+        except ValueError as e:
+            print("Error:", e)
+        
         play_again = input("Do you want to play again? (yes/no): ").lower()
         if play_again != 'yes':
             break
