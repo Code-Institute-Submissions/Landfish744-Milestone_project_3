@@ -39,7 +39,8 @@ class BattleshipsGame:
         print("Time for Battleships")
         self.print_board()
         
-        for turn in range(self.num_turns):
+        turn = 0
+        while turn < self.num_turns:
             print("Turn", turn + 1)
             guess_row, guess_col = self.make_guess()
 
@@ -49,11 +50,12 @@ class BattleshipsGame:
 
             if self.board[guess_row][guess_col] == "X":
                 print("You already guessed that one.")
-            else:
-                print("You missed!")
-                self.board[guess_row][guess_col] = "X"
+                continue
 
+            print("You missed!")
+            self.board[guess_row][guess_col] = "X"
             self.print_board()
+            turn += 1
 
         print("Game Over.")
 
