@@ -99,24 +99,31 @@ if __name__ == "__main__":
             print("User and computer will choose starting from 0,0.")
             print("Game ends when turns end or player/computer hits ship.")
             print("You can type 'quit' to end game/start a new game.")
-            size = input(
-                "Enter the size of the game board: ").lower().strip()
-            if size == "quit":
-                print("thank you for playing")
+            size = input("Enter the size of the game board: ").lower().strip()
+            if size.lower() == "quit":
+                print("Thank you for playing")
                 exit()
             while not size.isdigit():
                 print("Size must be a number.")
                 size = input("Enter the size of the game board: ").strip()
+                if size.lower() == "quit":
+                    print("Thank you for playing")
+                    exit()
             size = int(size)
             possible_sizes = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
             while size not in possible_sizes:
                 print("Size must be in range from 1 to 12.")
-                print("That was not a quit command or a number!")
                 size = int(input("Enter the size of the game board: ").strip())
-            num_turns = input("Enter the number of turns: ")
+            num_turns = input("Enter the number of turns: ").lower().strip()
+            if num_turns == "quit":
+                print("Thank you for playing")
+                exit()
             while not num_turns.isdigit():
                 print("Number of turns must be a number.")
                 num_turns = input("Enter the number of turns: ").strip()
+                if num_turns.lower() == "quit":
+                    print("Thank you for playing")
+                    exit()
             num_turns = int(num_turns)
             if num_turns not in possible_sizes:
                 raise ValueError(
