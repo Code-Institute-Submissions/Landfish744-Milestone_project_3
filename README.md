@@ -26,11 +26,9 @@ This is by choosing a column and a row.
 
 You and the computer have a board each.
 
-The computer you are playing against will choose before you.
+You will see the choices the computer makes as well as the choices you have made.
 
-You will see the choices it makes as well as the choices you have made.
-
-If you either run out of turns or the computer or you hit a ship , the game ends.
+If you either run out of turns or the computer or you hit a ship(s) , the game ends.
 
 You can quit at any time by typing the word 'quit'.
 
