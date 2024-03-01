@@ -16,11 +16,13 @@ The game of Battleships is well known. My game is a simple version of this game.
 
 The has the rules explained when you start it up.
 
-You choose the board size and the number of turns between 1 - 12.
+You choose the board size and the number of turns between 1 - 12 for you and the computer.
 
 You then play the game as you would normally play a game of battleships.
 
 This is by choosing a column and a row.
+
+You and the computer have a board each.
 
 The computer you are playing against will choose before you.
 
@@ -45,7 +47,7 @@ You can quit at any time by typing the word 'quit'.
 
 ## Bugs I encountered
 
-- There was mainly I problem I ran into during my building of this game.
+- There was mainly one problem I ran into during my building of this game.
 - It was the quitting aspect of the game.
 - One of the builds the game gave an error message.
 - I restructered the code and this has now been fixed.
