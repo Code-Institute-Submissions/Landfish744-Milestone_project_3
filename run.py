@@ -78,6 +78,10 @@ class BattleshipsGame:
                     if not self.computer_ships:
                         print("You sunk all computer ships! You win!")
                         return
+                elif self.user_board[user_guess_row][user_guess_col] == "X" \
+                        or self.user_board[user_guess_row][user_guess_col] == "M":
+                    print("You already hit a ship here. Please choose again.")
+                    continue
                 else:
                     print("You missed!")
                     self.user_board[user_guess_row][user_guess_col] = "M"
@@ -98,6 +102,10 @@ class BattleshipsGame:
                 if not self.user_ships:
                     print("All your ships sunk! Computer wins!")
                     return
+            elif self.computer_board[comp_guess_row][comp_guess_col] == "X" \
+                    or self.computer_board[comp_guess_row][comp_guess_col] == "M":
+                print("Computer already hit a ship here. Computer chooses again.")
+                continue
             else:
                 print("Computer missed!")
                 self.computer_board[comp_guess_row][comp_guess_col] = "M"
@@ -116,8 +124,9 @@ if __name__ == "__main__":
     while True:
         try:
             print("Rules: You choose turns and grid size.")
+            print("Grid = 1-12 , turns = 1-12 , ships = 1-3")
             print("User and computer will choose starting from 0,0.")
-            print("Game ends when turns end or player/computer hits ship.")
+            print("Game ends when turns end or player/computer hits all chosen ships.")
             print("You can type 'quit' to end game/start a new game.")
             size = input("Enter the size of the game board: ").lower().strip()
             if size.lower() == "quit":
