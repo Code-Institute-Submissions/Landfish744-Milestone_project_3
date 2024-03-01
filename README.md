@@ -2,7 +2,7 @@
 
 This is a Code Institute portfolio project 3 based on python.
 
-![image of battleships app on multi-platforms](readme-images/Battleships-Mockup.png)
+![image of battleships app on multi-platforms](readme-images/Battleships-mockup.png)
 
 ## About
 
@@ -18,6 +18,8 @@ The has the rules explained when you start it up.
 
 You choose the board size and the number of turns between 1 - 12 for you and the computer.
 
+You will also choose number of ships between 1 - 3.
+
 You then play the game as you would normally play a game of battleships.
 
 This is by choosing a column and a row.
@@ -32,7 +34,7 @@ If you either run out of turns or the computer or you hit a ship , the game ends
 
 You can quit at any time by typing the word 'quit'.
 
-![image of battleships app mid way](readme-images/Battleships-Game.png)
+![image of battleships app mid way](readme-images/Battleships-game.png)
 
 ## Testing
 
