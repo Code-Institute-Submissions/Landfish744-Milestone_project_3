@@ -2,17 +2,32 @@ from random import randint
 
 
 class BattleshipsGame:
-    def __init__(self, size=5, num_turns=4):
+    def __init__(self, size=5, num_turns=4, num_ships=3):
         """
-        Start the battleship game with a given size
-        and number of turns.
+        Start the battleship game with a given size,
+        number of turns, and number of ships.
         """
         self.size = size
         self.num_turns = num_turns
+        self.num_ships = num_ships
         self.user_board = [['O'] * size for _ in range(size)]
         self.computer_board = [['O'] * size for _ in range(size)]
-        self.ship_row = randint(0, size - 1)
-        self.ship_col = randint(0, size - 1)
+        self.user_ships = self.place_ships()
+        self.computer_ships = self.place_ships()
+
+    def place_ships(self):
+        """
+        Place ships randomly on the game board.
+        """
+        ships = []
+        for _ in range(self.num_ships):
+            ship_row = randint(0, self.size - 1)
+            ship_col = randint(0, self.size - 1)
+            while (ship_row, ship_col) in ships:
+                ship_row = randint(0, self.size - 1)
+                ship_col = randint(0, self.size - 1)
+            ships.append((ship_row, ship_col))
+        return ships
 
     def print_board(self, board):
         """
@@ -56,17 +71,17 @@ class BattleshipsGame:
                     print("Please enter a guess within the board range.\n")
                     continue
 
-                if (user_guess_row == self.ship_row and
-                        user_guess_col == self.ship_col):
-                    print("You sunk my battleship!")
-                    return
+                if (user_guess_row, user_guess_col) in self.computer_ships:
+                    print("You hit a ship!")
+                    self.user_board[user_guess_row][user_guess_col] = "X"
+                    self.computer_ships.remove((user_guess_row, user_guess_col))
+                    if not self.computer_ships:
+                        print("You sunk all computer ships! You win!")
+                        return
+                else:
+                    print("You missed!")
+                    self.user_board[user_guess_row][user_guess_col] = "M"
 
-                if self.user_board[user_guess_row][user_guess_col] == "X":
-                    print("You already guessed that one.")
-                    continue
-
-                print("You missed!")
-                self.user_board[user_guess_row][user_guess_col] = "X"
                 self.print_board(self.user_board)
             except ValueError:
                 print("Please enter a guess in the board range.")
@@ -76,17 +91,17 @@ class BattleshipsGame:
             comp_guess_col = randint(0, self.size - 1)
             print("Computer guesses:", comp_guess_row, comp_guess_col)
 
-            if (comp_guess_row == self.ship_row and
-                    comp_guess_col == self.ship_col):
-                print("Computer sunk your battleship!")
-                return
+            if (comp_guess_row, comp_guess_col) in self.user_ships:
+                print("Computer hit your ship!")
+                self.computer_board[comp_guess_row][comp_guess_col] = "X"
+                self.user_ships.remove((comp_guess_row, comp_guess_col))
+                if not self.user_ships:
+                    print("All your ships sunk! Computer wins!")
+                    return
+            else:
+                print("Computer missed!")
+                self.computer_board[comp_guess_row][comp_guess_col] = "M"
 
-            if self.computer_board[comp_guess_row][comp_guess_col] == "X":
-                print("Computer already guessed that one.")
-                continue
-
-            print("Computer missed!")
-            self.computer_board[comp_guess_row][comp_guess_col] = "X"
             self.print_board(self.computer_board)
             turn += 1
 
@@ -95,7 +110,8 @@ class BattleshipsGame:
 
 if __name__ == "__main__":
     """
-    Allows user to choose game board size, number of turns, and play again.
+    Allows user to choose game board size, number of turns,
+    quit and play again. Also 
     """
     while True:
         try:
@@ -133,7 +149,23 @@ if __name__ == "__main__":
                 raise ValueError(
                     "Number of turns must be in the range from 1 to 12."
                 )
-            game = BattleshipsGame(size=size, num_turns=num_turns)
+            num_ships = input("Enter the number of ships: ").lower().strip()
+            if num_ships == "quit":
+                print("Thank you for playing")
+                exit()
+            possible_ships = [1, 2, 3]
+            while not num_ships.isdigit():
+                print("Number of ships must be a number.")
+                num_ships = input("Enter the number of ships: ").strip()
+                if num_ships.lower() == "quit":
+                    print("Thank you for playing")
+                    exit()
+            num_ships = int(num_ships)
+            if num_ships not in possible_ships:
+                raise ValueError(
+                        "Number of ships must be in the range from 1 to 3."
+                )
+            game = BattleshipsGame(size=size, num_turns=num_turns, num_ships=num_ships)
             game.play()
         except ValueError as e:
             print("Error:", e)
