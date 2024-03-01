@@ -42,18 +42,22 @@ class BattleshipsGame:
         while turn < self.num_turns:
             print("Turn", turn + 1)
 
-            user_guess_input = input("Enter your guess (row, col) with a comma, or type 'quit': ")
+            user_guess_input = input(
+                "Enter your guess (row, col) with a comma, or type 'quit': "
+            )
             if user_guess_input.lower() == 'quit':
                 print("Quitting game.")
                 return
 
             try:
-                user_guess_row, user_guess_col = map(int, user_guess_input.split(','))
+                user_guess_row, user_guess_col = map(
+                    int, user_guess_input.split(','))
                 if not self.validate_guess(user_guess_row, user_guess_col):
                     print("Please enter a guess within the board range.\n")
                     continue
 
-                if user_guess_row == self.ship_row and user_guess_col == self.ship_col:
+                if (user_guess_row == self.ship_row and
+                        user_guess_col == self.ship_col):
                     print("You sunk my battleship!")
                     return
 
@@ -72,7 +76,8 @@ class BattleshipsGame:
             comp_guess_col = randint(0, self.size - 1)
             print("Computer guesses:", comp_guess_row, comp_guess_col)
 
-            if comp_guess_row == self.ship_row and comp_guess_col == self.ship_col:
+            if (comp_guess_row == self.ship_row and
+                    comp_guess_col == self.ship_col):
                 print("Computer sunk your battleship!")
                 return
 
@@ -126,7 +131,8 @@ if __name__ == "__main__":
             num_turns = int(num_turns)
             if num_turns not in possible_sizes:
                 raise ValueError(
-                    "Number of turns must be in the range from 1 to 12.")
+                    "Number of turns must be in the range from 1 to 12."
+                )
             game = BattleshipsGame(size=size, num_turns=num_turns)
             game.play()
         except ValueError as e:
