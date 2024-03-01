@@ -36,6 +36,13 @@ You can quit at any time by typing the word 'quit'.
 
 ![image of battleships app mid way](readme-images/Battleships-game.png)
 
+## Flowchart
+
+This is a basic flowchart of how the game works out.
+
+![image of battleships flowchart](readme-images/Battleships-flowchart.png)
+
+
 ## Testing
 
 - The testing was done at intervals during the build.

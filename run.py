@@ -117,6 +117,7 @@ class BattleshipsGame:
 
         print("Game Over.")
 
+
 if __name__ == "__main__":
     """
     Allows user to choose game board size, number of turns,
@@ -145,7 +146,8 @@ if __name__ == "__main__":
             print("Input must be a valid integer.")
             continue
 
-        num_turns = input("Enter the turns of the game board: ").lower().strip()
+        num_turns = input("Enter the turns "
+                          "of the game board: ").lower().strip()
         if num_turns == "quit":
             print("Thank you for playing")
             play_again = input("Do you want to play again? (yes/no): ").lower()
@@ -161,7 +163,8 @@ if __name__ == "__main__":
             print("Input must be a valid integer.")
             continue
 
-        num_ships = input("Enter the ships of the game board: ").lower().strip()
+        num_ships = input("Enter the ships "
+                          "of the game board: ").lower().strip()
         if num_ships == "quit":
             print("Thank you for playing")
             play_again = input("Do you want to play again? (yes/no): ").lower()
