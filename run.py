@@ -117,72 +117,71 @@ class BattleshipsGame:
 
         print("Game Over.")
 
-
 if __name__ == "__main__":
     """
     Allows user to choose game board size, number of turns,
     quit and play again. Also choose number of ships.
     """
     while True:
+        print("Rules: You choose turns, grid size and ships.")
+        print("Grid = 1-12 , turns = 1-12 , ships = 1-3")
+        print("User and computer will choose starting from 1,1.")
+        print("Game ends when turns end "
+              "or player/computer hits all chosen ships.")
+        print("You can type 'quit' to end game/start a new game.")
+        size = input("Enter the size of the game board: ").lower().strip()
+        if size == "quit":
+            print("Thank you for playing")
+            play_again = input("Do you want to play again? (yes/no): ").lower()
+            if play_again != 'yes':
+                break
+            continue
         try:
-            print("Rules: You choose turns and grid size.")
-            print("Grid = 1-12 , turns = 1-12 , ships = 1-3")
-            print("User and computer will choose starting from 0,0.")
-            print("Game ends when turns end "
-                  "or player/computer hits all chosen ships.")
-            print("You can type 'quit' to end game/start a new game.")
-            size = input("Enter the size of the game board: ").lower().strip()
-            if size.lower() == "quit":
-                print("Thank you for playing")
-                exit()
-            while not size.isdigit():
-                print("Size must be a number.")
-                size = input("Enter the size of the game board: ").strip()
-                if size.lower() == "quit":
-                    print("Thank you for playing")
-                    exit()
             size = int(size)
-            possible_sizes = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
-            while size not in possible_sizes:
+            if size not in range(1, 13):
                 print("Size must be in the range from 1 to 12.")
-                size = int(input("Enter the size of the game board: ").strip())
-            num_turns = input("Enter the number of turns: ").lower().strip()
-            if num_turns == "quit":
-                print("Thank you for playing")
-                exit()
-            while not num_turns.isdigit():
-                print("Number of turns must be a number.")
-                num_turns = input("Enter the number of turns: ").strip()
-                if num_turns.lower() == "quit":
-                    print("Thank you for playing")
-                    exit()
+                continue
+        except ValueError:
+            print("Input must be a valid integer.")
+            continue
+
+        num_turns = input("Enter the turns of the game board: ").lower().strip()
+        if num_turns == "quit":
+            print("Thank you for playing")
+            play_again = input("Do you want to play again? (yes/no): ").lower()
+            if play_again != 'yes':
+                break
+            continue
+        try:
             num_turns = int(num_turns)
-            if num_turns not in possible_sizes:
-                raise ValueError(
-                    "Number of turns must be in the range from 1 to 12."
-                )
-            num_ships = input("Enter the number of ships: ").lower().strip()
-            if num_ships == "quit":
-                print("Thank you for playing")
-                exit()
-            possible_ships = [1, 2, 3]
-            while not num_ships.isdigit():
-                print("Number of ships must be a number.")
-                num_ships = input("Enter the number of ships: ").strip()
-                if num_ships.lower() == "quit":
-                    print("Thank you for playing")
-                    exit()
+            if num_turns not in range(1, 13):
+                print("Turns must be in the range from 1 to 12.")
+                continue
+        except ValueError:
+            print("Input must be a valid integer.")
+            continue
+
+        num_ships = input("Enter the ships of the game board: ").lower().strip()
+        if num_ships == "quit":
+            print("Thank you for playing")
+            play_again = input("Do you want to play again? (yes/no): ").lower()
+            if play_again != 'yes':
+                break
+            continue
+        try:
             num_ships = int(num_ships)
-            if num_ships not in possible_ships:
-                raise ValueError(
-                        "Number of ships must be in the range from 1 to 3."
-                )
-            game = BattleshipsGame(
-                size=size, num_turns=num_turns, num_ships=num_ships)
-            game.play()
-        except ValueError as e:
-            print("Error:", e)
+            if num_ships not in range(1, 4):
+                print("Ships must be in the range from 1 to 3.")
+                continue
+        except ValueError:
+            print("Input must be a valid integer.")
+            continue
+
+        game = BattleshipsGame(
+            size=size, num_turns=num_turns, num_ships=num_ships)
+        game.play()
 
         play_again = input("Do you want to play again? (yes/no): ").lower()
         if play_again != 'yes':
+            print("Thank you for playing")
             break
