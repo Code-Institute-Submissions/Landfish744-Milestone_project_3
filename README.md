@@ -14,7 +14,7 @@ The game of Battleships is well known. My game is a simple version of this game.
 
 ![image of battleships app at start](readme-images/Battleships-opening.png)
 
-The has the rules explained when you start it up.
+The game explains the rules when you start it up.
 
 You choose the board size and the number of turns between 1 - 12 for you and the computer.
 
@@ -31,6 +31,8 @@ You will see the choices the computer makes as well as the choices you have made
 If you either run out of turns or the computer or you hit a ship(s) , the game ends.
 
 You can quit at any time by typing the word 'quit'.
+
+And you will be asked if you want to play again after typing 'quit'.
 
 ![image of battleships app mid way](readme-images/Battleships-game.png)
 
